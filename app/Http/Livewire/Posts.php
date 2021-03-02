@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Post;
+use App\Models\User;
 
 class Posts extends Component
 {
@@ -17,7 +18,9 @@ class Posts extends Component
      */
     public function render()
     {
-        $this->posts = Post::all();
+        $user = auth()->user();
+
+        $this->posts = $user->posts;
         return view('livewire.posts');
     }
 
