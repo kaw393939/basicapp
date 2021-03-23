@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Post;
+use App\Models\Page;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share('posts', Post::all());
+        view()->share('public_pages', Page::all());
+        view()->share('copyright', "Copyright March 2021 Keith Williams");
     }
 }
