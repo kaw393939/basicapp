@@ -19,11 +19,13 @@ class Posts extends Component
     public function render()
     {
         $user = auth()->user();
-
         $this->posts = $user->posts;
         return view('livewire.posts');
     }
+    public function index() {
 
+        return view('livewire.posts_public');
+    }
     /**
      * The attributes that are mass assignable.
      *

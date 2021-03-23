@@ -25,4 +25,5 @@ class Post extends Model
             $model->user_id = Auth::id();
         });
     }
+
 }

@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Posts;
+use App\Http\Livewire\Posts as LiveWirePosts;
+use App\Http\Livewire\Contacts;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,12 +18,14 @@ use App\Http\Livewire\Posts;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+Route::get('/contacts', [Contacts::class, 'index']);
+
+Route::get('/posts/',[\App\Http\Controllers\PostsController::class, 'index'])->name('public_posts_index');
+Route::get('/posts/{id}',[\App\Http\Controllers\PostsController::class, 'show'])->name('public_posts_show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    $user = Auth::user();
-    $posts = $user->posts();
-    return view('dashboard', compact('posts'));
+    return view('dashboard');
 })->name('dashboard');
 
-Route::get('post', Posts::class)->name('post');
+Route::middleware(['auth:sanctum', 'verified'])->get('posts_admin', LiveWirePosts::class)->name('posts');
